@@ -33,6 +33,28 @@ INSERT INTO `login_log` (`id`, `username`, `datetime`, `ipaddress`, `status`) VA
 	(4, 'hannanyusop@lynk.my', '2017-08-03 00:04:00', '', NULL);
 /*!40000 ALTER TABLE `login_log` ENABLE KEYS */;
 
+-- Dumping structure for table online_profile.profiles
+CREATE TABLE IF NOT EXISTS `profiles` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) DEFAULT 0,
+  `profile_photo` longtext DEFAULT '0',
+  `cover_photo` longtext DEFAULT '0',
+  `position` varchar(255) DEFAULT '0',
+  `experience` varchar(255) DEFAULT '0',
+  `total_project` int(10) unsigned zerofill DEFAULT 0000000000,
+  `profit` float unsigned zerofill DEFAULT 000000000000,
+  `about_us` longtext DEFAULT '0',
+  `current_project` varchar(255) DEFAULT '0',
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table online_profile.profiles: ~0 rows (approximately)
+/*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
+
 -- Dumping structure for table online_profile.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
