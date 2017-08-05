@@ -16,12 +16,6 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Csrf');
 
-        $this->loadComponent('Auth', [
-        'authorize' => 'Controller',
-        'unauthorizedRedirect' => $this->referer(),
-         ]);
-    // Allow everyone access to specific actions
-    $this->Auth->allow(['register', 'forgot', 'reset', 'logout','view/1']);
     }
     public function beforeRender(Event $event)
     {

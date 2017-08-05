@@ -80,16 +80,7 @@ class UsersController extends AppController
 
     public function login()
     {
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user && $user['status'] != 0) { // Don't allow "Disabled" users to log in
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }if($user['status'] === 0){
-                $this->flash->error('Your account has been blocked! Contact Hannan for further information.');
-            }
-            $this->Flash->error('Your username or password is incorrect.');
-        }
+
     }
     public function forgot()
     {
