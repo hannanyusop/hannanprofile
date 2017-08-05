@@ -13,11 +13,6 @@ use App\Controller\AppController;
 class UsersController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
     public function index()
     {
         $users = $this->paginate($this->Users);
@@ -26,13 +21,6 @@ class UsersController extends AppController
         $this->set('_serialize', ['users']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
@@ -43,11 +31,6 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $user = $this->Users->newEntity();
@@ -64,13 +47,6 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
@@ -89,13 +65,6 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
@@ -107,5 +76,27 @@ class UsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user && $user['status'] != 0) { // Don't allow "Disabled" users to log in
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }if($user['status'] === 0){
+                $this->flash->error('Your account has been blocked! Contact Hannan for further information.');
+            }
+            $this->Flash->error('Your username or password is incorrect.');
+        }
+    }
+    public function forgot()
+    {
+
+    }
+        public function register()
+    {
+
     }
 }
