@@ -1,4 +1,3 @@
-
 <head>
   <!-- CORE CSS-->
   <?= $this->Html->css('materialize.css') ?>
@@ -10,19 +9,19 @@
   <?= $this->fetch('css') ?>
 </head>
 
-  <!-- Start Page Loading -->
   <div id="loader-wrapper">
       <div id="loader"></div>        
       <div class="loader-section section-left"></div>
       <div class="loader-section section-right"></div>
   </div>
-  <!-- End Page Loading -->
+
 
 
 
   <div id="login-page" class="row">
+   <?= $this->Flash->render()?>
     <div class="col s12 z-depth-4 card-panel">
-      <form class="login-form">
+      <?= $this->Form->create()?> 
         <div class="row">
           <div class="input-field col s12 center">
             <h4>Register</h4>
@@ -31,35 +30,47 @@
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-social-person-outline prefix"></i>
-            <input id="username" type="text">
-            <label for="username" class="center-align">Username</label>
+            <?= 
+              $this->Form->input('username',[
+              'id' => 'password',
+              'required' => true,
+              'autofocus' => true
+            ]);
+            ?>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-communication-email prefix"></i>
-            <input id="email" type="email">
-            <label for="email" class="center-align">Email</label>
+            <?= $this->Form ->input('email',[
+                    'type' => 'email',
+                    'id' => 'email',
+                    'require' => true
+            ])?>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-action-lock-outline prefix"></i>
-            <input id="password" type="password">
-            <label for="password">Password</label>
+           <?= $this->Form->input('password',[
+                    'type' => 'password',
+                    'id' => 'password',
+                    'require' => true
+                ]);
+           ?>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-action-lock-outline prefix"></i>
-            <input id="password-again" type="password">
-            <label for="password-again">Password again</label>
+            <?= $this->Form->input('password', [
+                      'type' => 'password',
+                      'id'  => 'passowrd-again',
+                      'require' => true
+              ]);
+            ?>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <a href="index.html" class="btn waves-effect waves-light col s12">Register Now</a>
+            <?= $this->Form->button(__('Register Now'),['class'=>'btn waves-effect waves-light col s12']); ?>
           </div>
           <div class="input-field col s12">
             <p class="margin center medium-small sign-up">Already have an account? 
@@ -67,7 +78,7 @@
             </p>
           </div>
         </div>
-      </form>
+     <?= $this->Form->end() ?>
     </div>
   </div>
 

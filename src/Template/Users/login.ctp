@@ -22,7 +22,7 @@
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
       <?= $this->Flash->render('auth'); ?>
-      <?= $this->Form->create('User');
+      <?= $this->Form->create();
       ?>
         <div class="row">
           <div class="input-field col s12 center">
