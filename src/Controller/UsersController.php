@@ -2,14 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
-/**
- * Users Controller
- *
- * @property \App\Model\Table\UsersTable $Users
- *
- * @method \App\Model\Entity\User[] paginate($object = null, array $settings = [])
- */
+use Cake\Event\Event;
 class UsersController extends AppController
 {
 
@@ -57,7 +50,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'profile']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -78,16 +71,82 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // Allow users to register and logout.
+        // You should not add the "login" action to allow list. Doing so would
+        // cause problems with normal functioning of AuthComponent.
+        $this->Auth->allow(['add', 'logout','register']);
+    }
+
     public function login()
     {
-
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error(__('Invalid username or password, try again'));
+        }
     }
-    public function forgot()
-    {
 
+    public function logout()
+    {
+      return $this->redirect($this->Auth->logout());
     }
-        public function register()
-    {
 
+    public function register()
+    {
+        if($this->request->is('post')){
+            $this->Flash->error(__('Form submited!'));
+        }
+    }
+
+    public function profile()
+    {
+        $uid = $this->Auth->user('id');      
+
+        $user = $this->Users->Profiles
+                     ->find()
+                     ->where(['Users.id' =>$this->Auth->user('id')])
+                     ->contain(['Users'])
+                     ->toArray();
+
+        $this->set('user', $user);
+        $this->set('_serialize', ['user']);
+    }
+
+    public function listUsers()
+    {
+        $users = $this->paginate($this->Users);
+
+        $this->set(compact('users'));
+        $this->set('_serialize', ['users']);
+    }
+
+    public function export()
+    {
+      $id = $this->request->data('id');
+      $data = $this->Users->find('all', ['conditions' => ['id' => $id]])->toArray();
+
+      if($data)
+      {
+        $this->response->download('list-users.csv');
+        $_extract = ['id', 'username', 'email'];
+        $_header=['id','username','email'];
+        $this->set(compact('data', '_serialize', '_header', '_extract'));
+        $_serialize = 'data';
+        $this->set(compact('data', '_serialize'));
+        $this->viewBuilder()->className('CsvView.Csv');
+        return;
+      }
+        $this->Flash->error(__('No users!!'));
+    }
+
+    public function test()
+    {
+      $this -> autoRender =false;
     }
 }

@@ -19,6 +19,8 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Profiles');
     }
 
     public function validationDefault(Validator $validator)

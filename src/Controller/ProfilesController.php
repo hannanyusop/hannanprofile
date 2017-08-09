@@ -94,13 +94,16 @@ class ProfilesController extends AppController
         $this->set('_serialize', ['profile']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Profile id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+    public function profile($id = null)
+    {
+        $profile = $this->profile->find()
+                        ->select(['users.id'])
+                        ->where(['Users.id' => 1])
+                        ->contain(['Users']);
+        $this->set(compact('profiles'));
+        $this->set('_serialize', ['profiles']);
+
+    }
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
