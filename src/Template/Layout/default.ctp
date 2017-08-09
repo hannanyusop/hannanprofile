@@ -31,7 +31,8 @@
   <!-- For Windows Phone -->
 
 </head>
-<body class="cyan">
+<body class="">
     <?= $this->Flash->render() ?>
     <?= $this->fetch('content') ?>
+</body>
 </html>

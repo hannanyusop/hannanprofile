@@ -71,7 +71,7 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
- public function beforeFilter(Event $event)
+    public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         // Allow users to register and logout.
@@ -94,29 +94,59 @@ class UsersController extends AppController
 
     public function logout()
     {
-        return $this->redirect($this->Auth->logout());
+      return $this->redirect($this->Auth->logout());
     }
-        public function register()
+
+    public function register()
     {
         if($this->request->is('post')){
             $this->Flash->error(__('Form submited!'));
         }
     }
-    public function profile(){
+
+    public function profile()
+    {
         $uid = $this->Auth->user('id');      
 
-        $user = $this->Users->get($uid, [
-            'contain' => []
-        ]);
+        $user = $this->Users->Profiles
+                     ->find()
+                     ->where(['Users.id' =>$this->Auth->user('id')])
+                     ->contain(['Users'])
+                     ->toArray();
 
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
     }
-     public function listUsers()
+
+    public function listUsers()
     {
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
+    }
+
+    public function export()
+    {
+      $id = $this->request->data('id');
+      $data = $this->Users->find('all', ['conditions' => ['id' => $id]])->toArray();
+
+      if($data)
+      {
+        $this->response->download('list-users.csv');
+        $_extract = ['id', 'username', 'email'];
+        $_header=['id','username','email'];
+        $this->set(compact('data', '_serialize', '_header', '_extract'));
+        $_serialize = 'data';
+        $this->set(compact('data', '_serialize'));
+        $this->viewBuilder()->className('CsvView.Csv');
+        return;
+      }
+        $this->Flash->error(__('No users!!'));
+    }
+
+    public function test()
+    {
+      $this -> autoRender =false;
     }
 }

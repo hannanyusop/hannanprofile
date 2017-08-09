@@ -14,7 +14,7 @@ class AppController extends Controller
         $this->loadComponent('Auth', [
             'loginRedirect' => [
                 'controller' => 'Users',
-                'action' => 'index'
+                'action' => 'profile'
             ],
             'logoutRedirect' => [
                 'controller' => 'Users',
@@ -25,7 +25,7 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'view', 'display','edit']);
+        $this->Auth->allow(['logout', 'register','forgot']);
     }
 
 

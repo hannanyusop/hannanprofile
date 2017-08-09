@@ -37,6 +37,22 @@
                   <ol class="breadcrumb">
                       <li><?= $this->Html->link(__('Profile'),['action' => 'profile']); ?></li>
                       <li><a href="#">Tables</a></li>
+                      <li>
+                        <?=
+                            $this->Html->link('export', [
+                            'controller' => 'users', 
+                            'action' => 'test'
+                          ])
+                        ?>
+                      </li>
+                      <li>
+                        <?=
+                          $this->Html->link('Export HTML',[
+                            'controller' => 'Users',
+                            'action' => 'test'
+                          ]);
+                        ?>
+                    </li>
                       <li class="active">Basic Tables</li>
                   </ol>
                 </div>
@@ -54,10 +70,15 @@
             <div class="divider"></div> 
             <!--DataTables example Row grouping-->
             <div id="row-grouping" class="section">
-              <h4 class="header">DataTables Row grouping</h4>
+              <h4 class="header">SELECT USERS</h4>
               <div class="row">
                 <div class="col s12 m4 l3">
-                  <p>Although DataTables doesn't have row grouping built-in (picking one of the many methods available would overly limit the DataTables core), it is most certainly possible to give the look and feel of row grouping.</p>
+                  <p>
+                    <?= $this->Form->create(null,['url' => ['action' => 'export']]);?>
+                    <?= $this->Form->input('id',['type' =>'number']); ?>
+                     <?= $this->Form->button(__('Export CSV files'),['class'=>'btn waves-effect waves-light col s12']); ?>
+                    <?= $this->Form->end(); ?>                 
+                  </p>
                 </div>
                 <div class="col s12 m8 l9">
                   <table id="data-table-simple" class="responsive-table display" cellspacing="0"" width="100%">

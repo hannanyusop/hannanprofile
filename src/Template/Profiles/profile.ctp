@@ -71,7 +71,7 @@
                      <?=
                      $this->Html->link($this->Html->tag('i', '',
                           ['class' => 'mdi-action-dashboard']).'Dashboard',
-                          ['controller' => 'Users','action' => 'edit',$user[0]['user']['id']],
+                          ['controller' => 'Users','action' => 'edit',$user->id],
                           ['escape' => false],
                           ['class' => 'cyan-text']
                       );
@@ -469,7 +469,7 @@
             <div id="profile-page-header" class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                   <?=
-                    $this->Html->image('cover/'.$user[0]['cover_photo'],[
+                    $this->Html->image('/images/user-profile-bg.jpg',[
                       'class' => 'activator',
                       'alt' => 'user background'
                     ]);
@@ -477,7 +477,7 @@
                 </div>
                 <figure class="card-profile-image">
                  <?=
-                    $this->Html->image('profile/'.$user[0]['profile_photo'],[
+                    $this->Html->image('/images/avatar.jpg',[
                       'class' => 'circle z-depth-2 responsive-img activator',
                       'alt' => 'profile image'
                     ]);
@@ -486,15 +486,15 @@
                 <div class="card-content">
                   <div class="row">                    
                     <div class="col s3 offset-s2">                        
-                        <h4 class="card-title grey-text text-darken-4"><?= $user[0]['user']['name']; ?></h4>
-                        <p class="medium-small grey-text"><?= $user[0]['position']; ?></p>                        
+                        <h4 class="card-title grey-text text-darken-4"><?= h($user->name) ?></h4>
+                        <p class="medium-small grey-text">Project Manager</p>                        
                     </div>
                     <div class="col s2 center-align">
-                        <h4 class="card-title grey-text text-darken-4"><?= $user[0]['experience']; ?></h4>
+                        <h4 class="card-title grey-text text-darken-4">10+</h4>
                         <p class="medium-small grey-text">Work Experience</p>                        
                     </div>
                     <div class="col s2 center-align">
-                        <h4 class="card-title grey-text text-darken-4"><?= $user[0]['total_project']; ?></h4>
+                        <h4 class="card-title grey-text text-darken-4">6</h4>
                         <p class="medium-small grey-text">Completed Projects</p>                        
                     </div>                    
                     <div class="col s2 center-align">
@@ -532,7 +532,7 @@
                 <div class="card light-blue">
                   <div class="card-content white-text">
                     <span class="card-title">About Me!</span>
-                    <p><?= $user[0]['about_us']; ?></p>
+                    <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
                   </div>                  
                 </div>
                 <!-- Profile About  -->
@@ -579,7 +579,7 @@
                 <ul id="profile-page-about-feed" class="collection z-depth-1">
                   <li class="collection-item avatar">
                     <?=
-                      $this->Html->image('profile/'.$user[0]['profile_photo'],[
+                      $this->Html->image('/images/avatar.jpg',[
                         'class' => 'circle',
                         'alt' => 'profile image'
                       ]);
@@ -757,7 +757,7 @@
                       <div class="row">
                         <div class="col s2">
                           <?=
-                            $this->Html->image('profile/'.$user[0]['profile_photo'],[
+                            $this->Html->image('/images/avatar.jpg',[
                               'class' => 'circle responsive-img valign profile-image-post',
                               'alt' => 'profile image'
                             ]);
@@ -794,7 +794,7 @@
                     <div id="AddPhotos" class="tab-content col s12  grey lighten-4">
                       <div class="row">
                         <div class="col s2">
-                          <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                          <?= $this->Html->Image('/images/avatar.jpg',[
                                     'class' => 'circle responsive-img valign profile-image-post'
                               ]);
                           ?>
@@ -830,7 +830,7 @@
                     <div id="CreateAlbum" class="tab-content col s12  grey lighten-4">
                       <div class="row">
                         <div class="col s2">
-                          <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                          <?= $this->Html->Image('/images/avatar.jpg',[
                               'class' => 'circle responsive-img valign profile-image-post'
 
                             ]);
@@ -875,7 +875,7 @@
                         <div class="card-profile-title">
                           <div class="row">
                             <div class="col s1">
-                              <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                              <?= $this->Html->Image('/images/avatar.jpg',[
                                     'class' => 'circle responsive-img valign profile-image-post'
                                 ]);
                               ?>                      
@@ -923,7 +923,7 @@
                         <div class="card-profile-title">
                           <div class="row">
                             <div class="col s1">
-                             <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                             <?= $this->Html->Image('/images/avatar.jpg',[
                                     'class' => 'circle responsive-img valign profile-image-post'
                               ]);
                           ?>                      
@@ -969,7 +969,7 @@
                         <div class="card-profile-title">
                           <div class="row">
                             <div class="col s1">
-                              <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                              <?= $this->Html->Image('/images/avatar.jpg',[
                                       'class' => 'circle responsive-img valign profile-post-uer-image',
                                       'alt' => 'avatar'
                                   ]);
@@ -1018,7 +1018,7 @@
                         <div class="card-profile-title">
                           <div class="row">
                             <div class="col s1">
-                              <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                              <?= $this->Html->Image('/images/avatar.jpg',[
                                   'class' => 'circle responsive-img valign profile-post-uer-image'
                                 ]);
                               ?>                      
@@ -1167,7 +1167,7 @@
                     <div class="collapsible-body favorite-associates">
                         <div class="favorite-associate-list chat-out-list row">
                             <div class="col s4">
-                          <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                          <?= $this->Html->Image('/images/avatar.jpg',[
                                     'class' => 'circle responsive-img online-user valign profile-image'
                               ]);
                           ?>
@@ -1179,7 +1179,7 @@
                         </div>
                         <div class="favorite-associate-list chat-out-list row">
                             <div class="col s4">
-                          <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                          <?= $this->Html->Image('/images/avatar.jpg',[
                                     'class' => 'circle responsive-img online-user valign profile-image'
                               ]);
                           ?>
@@ -1191,7 +1191,7 @@
                         </div>
                         <div class="favorite-associate-list chat-out-list row">
                             <div class="col s4">
-                          <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                          <?= $this->Html->Image('/images/avatar.jpg',[
                                     'class' => 'circle responsive-img online-user valign profile-image'
                               ]);
                           ?>
@@ -1204,7 +1204,7 @@
                         <div class="favorite-associate-list chat-out-list row">
                         
                             <div class="col s4">
-                            <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                            <?= $this->Html->Image('/images/avatar.jpg',[
                                     'class' => 'circle responsive-img online-user valign profile-image'
                               ]);
                           ?>
@@ -1215,12 +1215,12 @@
                             </div>
                         </div>
                         <div class="favorite-associate-list chat-out-list row">
-                         <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                         <?= $this->Html->Image('/images/avatar.jpg',[
                                     'class' => 'circle responsive-img valign profile-image-post'
                               ]);
                           ?>
                             <div class="col s4">
-                             <?= $this->Html->Image('profile/'.$user[0]['profile_photo'],[
+                             <?= $this->Html->Image('/images/avatar.jpg',[
                                     'class' => 'circle responsive-img offline-user valign profile-image'
                               ]);
                           ?>

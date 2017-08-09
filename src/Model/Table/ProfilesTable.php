@@ -40,9 +40,7 @@ class ProfilesTable extends Table
 
         $this->addBehavior('Timestamp');
 
-       $this->belongsTo('Users')
-            ->setForeignKey('user_id')
-            ->setJoinType('INNER');
+       $this->belongsTo('Users');
 
     }
 

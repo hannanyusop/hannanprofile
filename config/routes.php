@@ -80,3 +80,6 @@ Router::scope('/', function (RouteBuilder $routes) {
  * how to customize the loading of plugin routes.
  */
 Plugin::routes();
+
+//csv plugin
+Router::extensions(['csv']);

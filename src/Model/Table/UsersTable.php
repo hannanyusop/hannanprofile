@@ -20,7 +20,7 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->hasOne('Profile');
+        $this->belongsTo('Profiles');
     }
 
     public function validationDefault(Validator $validator)
